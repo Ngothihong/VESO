@@ -60,10 +60,20 @@ namespace QuanLyVeSo.Web.Areas.Admin.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult Delete(string id)
+        public ActionResult Delete(string id)
         {
-            var result = DaiLyDao.Instance.Delete(id);
-            return Json(result, JsonRequestBehavior.AllowGet);
+            if (ModelState.IsValid)
+            {
+                if (DaiLyDao.Instance.Delete(id))
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Xóa đại lí không thành công");
+                }
+            }
+            return View("Index");
         }
 
         public ActionResult Edit(string id)

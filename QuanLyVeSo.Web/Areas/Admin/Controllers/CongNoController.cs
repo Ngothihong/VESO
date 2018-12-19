@@ -75,10 +75,20 @@ namespace QuanLyVeSo.Web.Areas.Admin.Controllers
             }
             return View(model);
         }
-        public JsonResult Delete(int id)
+        public ActionResult Delete(string id)
         {
-            var result = CongNoDao.Instance.Delete(id);
-            return Json(result, JsonRequestBehavior.AllowGet);
+            if (ModelState.IsValid)
+            {
+                if (CongNoDao.Instance.Delete(id))
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Xóa công nợ không thành công");
+                }
+            }
+            return View("Index");
         }
 
     }

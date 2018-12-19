@@ -54,10 +54,20 @@ namespace QuanLyVeSo.Web.Areas.Admin.Controllers
             return View(model);
         }
 
-        public JsonResult Delete(string id)
+        public ActionResult Delete(string id)
         {
-            var result = GiaiThuongDao.Instance.Delete(id);
-            return Json(result, JsonRequestBehavior.AllowGet);
+            if (ModelState.IsValid)
+            {
+                if (GiaiThuongDao.Instance.Delete(id))
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Xóa giải thưởng không thành công");
+                }
+            }
+            return View("Index");
         }
 
         public ActionResult Edit(string id)

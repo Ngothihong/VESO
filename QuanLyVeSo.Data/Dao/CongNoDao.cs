@@ -86,11 +86,11 @@ namespace QuanLyVeSo.Data.Dao
 
             return true;
         }
-        public bool Delete(int maCongNo)
+        public bool Delete(string maCongNo)
         {
             try
             {
-                var entity = GetSingle(maCongNo);
+                var entity = GetSingle(int.Parse(maCongNo));
                 db.CongNo.Remove(entity);
                 db.SaveChanges();
             }

@@ -69,7 +69,10 @@
                             <td>
                                 @Html.ActionLink("Chi tiết", "Detail", new { ID = item.MaDaiLy }) |
                                 @Html.ActionLink("Sửa", "Edit", new { ID = item.MaDaiLy }) |
+                                @Html.ActionLink("Xóa", "Delete", new { ID = item.MaDaiLy })
+                                <!--
                                 <a href="#" data-id="@item.MaDaiLy" class="btn-delete">Xóa</a>
+                                -->
                             </td>
                         </tr>
                     }
